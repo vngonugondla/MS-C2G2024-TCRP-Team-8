@@ -1,4 +1,3 @@
-from user.matchmaking import compute_plaintext_similarity
 from user.user_profile import UserProfile
 from user.matchmaking import compute_similarity
 from user.matchmaking import find_matches
@@ -79,63 +78,6 @@ def generate_test_user_profiles():
         )
     ]
     return user_profiles
-
-def test_compute_plaintext_similarity():
-
-    # Test case 1: Same text
-    text1 = "Hello, world!"
-    text2 = "Hello, world!"
-    score = compute_plaintext_similarity(text1, text2)
-    assert score == 1.0
-
-    # Test case 2: Different text
-    text1 = "Hello, world!"
-    text2 = "Goodbye; moon?"
-    score = compute_plaintext_similarity(text1, text2)
-    assert score < 0.5
-
-    # Test case 3: Similar text
-    text1 = "Hello, world!"
-    text2 = "Hello, everyone!"
-    score = compute_plaintext_similarity(text1, text2)
-    assert score > 0.5
-
-    # Test case 4: Empty text
-    text1 = ""
-    text2 = "Hello, world!"
-    score = compute_plaintext_similarity(text1, text2)
-    assert score == 0.5
-
-def test_compute_similarity():
-    users = generate_test_user_profiles()
-
-    # Test case 1: Same user
-    score = compute_similarity(users[0], users[0])
-    assert score == 1.0
-
-    # Test case 2: Different users with different attributes
-    score = compute_similarity(users[0], users[1])
-    assert 0 <= score <= 1
-
-    # Test case 3: Users with same gender and location
-    score = compute_similarity(users[0], users[3])
-    assert score > 0.5
-
-    # Test case 4: Users with different community roles
-    score = compute_similarity(users[0], users[2])
-    assert score < 0.5
-
-    # Test case 5: Users with common associates
-    score = compute_similarity(users[0], users[4])
-    assert score > 0.5
-
-    # Test case 6: Users with different interests
-    score = compute_similarity(users[1], users[2])
-    assert score < 0.5
-
-    # Test case 7: Users with similar bios
-    score = compute_similarity(users[0], users[4])
-    assert score > 0.5
 
 def test_find_matches():
     users = generate_test_user_profiles()

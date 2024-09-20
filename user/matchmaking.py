@@ -10,22 +10,15 @@ def find_matches(user, community, k=3):
     Find the top k users in the community that are most similar to the given user.
     """
     # Compute similarity scores between the given user and all other users in the community
-    similarity_scores = []
-    for other_user in community:
-        if other_user == user:
-            continue
-        score = compute_similarity(user, other_user)
-        similarity_scores.append((other_user, score))
-    
+    similarity_scores = [(other_user, compute_similarity(user, other_user)) for other_user in community if other_user != user]
+
     # Sort the similarity scores in descending order
-    similarity_scores.sort(key=lambda x: x[1], reverse=True)
+    similarity_scores.sort(key=lambda x : x[1], reverse=True)
     
     # Get the top k most similar users
-    top_matches = similarity_scores[:k]
-    
-    return top_matches
+    return similarity_scores[:k]
 
-
+model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 def compute_similarity(user1, user2):
     """
     Compute a similarity score between two user profiles.
@@ -67,10 +60,21 @@ def compute_similarity(user1, user2):
             return 0.5  # Neutral score if associates are missing
         common_associates = sum([1 for associate in user1.associates if associate in user2.associates])
         return min(common_associates, 5) / 5  # Normalize between 0 and 1
+    
+    def plaintext_similarity(user1, user2):
+        """
+        Compute similarity between two strings using a pre-trained sentence transformer model.
+        """
+
+        if not user1 or not user2:
+            return 0.5
+
+        embeddings = model.encode([user1, user2])
+        return cosine_similarity([embeddings[0]], [embeddings[1]])[0][0]
 
     # Updated bio and interest similarity checks for empty cases
-    bio_score = compute_plaintext_similarity(user1.bio, user2.bio) if user1.bio and user2.bio else 0.5
-    interest_score = compute_plaintext_similarity(user1.interests, user2.interests) if user1.interests and user2.interests else 0.5
+    bio_score = plaintext_similarity(user1.bio, user2.bio) if user1.bio and user2.bio else 0.5
+    interest_score = plaintext_similarity(user1.interests, user2.interests) if user1.interests and user2.interests else 0.5
 
     # Hardcoded weights for different profile attributes
     weights = {
@@ -100,15 +104,3 @@ def compute_similarity(user1, user2):
     total_similarity = sum([weight * feature for weight, feature in zip(weights.values(), features)])
 
     return min(total_similarity, 1.0)
-
-model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
-def compute_plaintext_similarity(str1, str2):
-        """
-        Compute similarity between two strings using a pre-trained sentence transformer model.
-        """
-
-        if not str1 or not str2:
-            return 0.5
-
-        embeddings = model.encode([str1, str2])
-        return cosine_similarity([embeddings[0]], [embeddings[1]])[0][0]
