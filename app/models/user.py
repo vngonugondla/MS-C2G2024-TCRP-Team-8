@@ -1,13 +1,20 @@
 from pydantic import BaseModel, EmailStr
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 
 class User(BaseModel):
-    uid: str
-    email: EmailStr
+    user_id: str
     name: str
-    age: int
+    email: EmailStr
+    phone: Optional[str]
+    birthday: datetime
+    gender: Optional[str]
+    bio: Optional[str] = ""
+    interests: List[str] = []
+    community_role: str = 'member'
     profile_picture: Optional[str] = None
-    bio: Optional[str] = None
-    created_at: datetime = datetime.now()
-    updated_at: datetime = datetime.now()
+    location: Optional[str] = None
+    approved: bool = False
+    active: bool = False
+    created_at: datetime = datetime.utcnow()
+    points: int = 0
