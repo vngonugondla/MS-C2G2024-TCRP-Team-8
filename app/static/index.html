@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Chat App</title>
+</head>
+<body>
+    <h1>Community Chat App</h1>
+    <div id="auth">
+        <h2>Sign Up</h2>
+        <input id="email" type="email" placeholder="Email">
+        <input id="password" type="password" placeholder="Password">
+        <button id="signUpButton">Sign Up</button>
+    </div>
+    <div id="profile" style="display: none;">
+        <h2>Create Profile</h2>
+        <input id="name" placeholder="Name">
+        <input id="age" type="number" placeholder="Age">
+        <input id="bio" placeholder="Bio">
+        <button id="createProfileButton">Create Profile</button>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            // add secrets here
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+
+        document.getElementById("signUpButton").addEventListener("click", async () => {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            try {
+                await createUserWithEmailAndPassword(auth, email, password);
+                document.getElementById("auth").style.display = "none";
+                document.getElementById("profile").style.display = "block";
+            } catch (error) {
+                console.error("Error signing up: ", error);
+            }
+        });
+
+        document.getElementById("createProfileButton").addEventListener("click", async () => {
+            const user = auth.currentUser;
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const bio = document.getElementById("bio").value;
+
+            if (user) {
+                const profile = {
+                    uid: user.uid,
+                    name: name,
+                    age: parseInt(age),
+                    bio: bio,
+                };
+
+                await fetch("/users/profile", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${await user.getIdToken()}`,
+                    },
+                    body: JSON.stringify(profile)
+                });
+                alert("Profile created successfully!");
+            }
+        });
+    </script>
+</body>
+</html>

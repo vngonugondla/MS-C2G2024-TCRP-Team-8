@@ -1,3 +1,6 @@
-scikit-learn
-transformers
-sentence-transformers
+fastapi
+uvicorn
+firebase-admin
+pydantic[email]
+httpx
+python-dotenv
