@@ -14,35 +14,31 @@ type Link = {
 
 const links = [
   {
-    label: `Features`,
-    href: `/`,
+    label: `Suggestion Portal`,
+    href: `/portal`,
   },
   {
-    label: `Testimonials`,
-    href: `/`,
+    label: `Chatbot`,
+    href: `/chatbot`,
   },
   {
-    label: `Pricing`,
-    href: `/`,
+    label: `Our Community`,
+    href: `/community`,
   },
   {
-    label: `Blog`,
-    href: `/`,
+    label: `Meet Members`,
+    href: `/meet`,
+  },
+  {
+    label: `Start Chatting`,
+    href: `/message`,
   },
 ];
 
 const secondaryLinks = [
   {
-    label: `Contact sales`,
-    href: `/`,
-  },
-  {
     label: `Log in`,
-    href: `/`,
-  },
-  {
-    label: `Get Started`,
-    href: `/`,
+    href: `/login`,
   },
 ];
 
@@ -96,15 +92,13 @@ const MobileMenu = () => (
     </div>
     <div className={tw(`pt-4 pb-3 border-t border-gray-400`)}>
       <div className={tw(`px-2 space-y-1`)}>
-        {secondaryLinks.map((link: Link) => (
-          <a
-            key={`mobile-${link.label}`}
-            href={link.href}
-            className={tw(`block px-3 py-2 text-base font-medium text-gray-500`)}
-          >
-            {link.label}
-          </a>
-        ))}
+        <a
+          key={`mobile-${secondaryLinks[0].label}`}
+          href={secondaryLinks[0].href}
+          className={tw(`block px-3 py-2 text-base font-medium text-gray-500`)}
+        >
+          {secondaryLinks[0].label}
+        </a>
       </div>
     </div>
   </div>
@@ -138,9 +132,7 @@ const Navigation = () => {
           </div>
           <div className={tw(`hidden md:block`)}>
             <div className={tw(`ml-4 flex items-center md:ml-6`)}>
-              <Button modifier="border-0 mr-2">Contact sales</Button>
-              <Button modifier="border-0 mr-2">Log in</Button>
-              <Button primary>Get started</Button>
+              <Button primary>Log In</Button>
             </div>
           </div>
           <div className={tw(`-mr-2 flex md:hidden`)}>
