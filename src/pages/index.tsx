@@ -18,14 +18,14 @@ export default function Home() {
       />
       <Header />
       <main>
-        <VideoSection />
-        <ListSection />
-        <FeatureSection />
+        {/* <VideoSection /> */}
+        {/* <ListSection /> */}
+        {/* <FeatureSection /> */}
         <CasesSection />
-        <SocialProof />
-        <PricingTable />
+        {/* <SocialProof /> */}
+        {/* <PricingTable /> */}
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </Page>
   );
 }
