@@ -1,15 +1,8 @@
 import firebase_admin
 from firebase_admin import credentials, firestore, messaging
+from app.services.firebase_service import db
 
-# Path to your service account key JSON file (downloaded from Firebase Console)
-SERVICE_ACCOUNT_PATH = "f9c8ad7b0a81cb6acbf415830d536defcc650c33.json"
 
-# Initialize Firebase Admin SDK
-cred = credentials.Certificate(SERVICE_ACCOUNT_PATH)
-firebase_admin.initialize_app(cred)
-
-# Initialize Firestore
-db = firestore.client()
 
 # Function to store the user's FCM token in Firestore
 def store_fcm_token(user_id, fcm_token):
