@@ -102,6 +102,19 @@ const MobileMenu = () => (
 const Navigation = () => {
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
+
+  const toggleUserDropdown = () => {
+    setShowUserDropdown(!showUserDropdown);
+  };
+
+  const userData = {
+    name: 'John Doe',
+    birthday: 'January 1, 1990',
+    role: 'Staff',
+    email: 'johndoe@example.com',
+    points: 150,
+  };
 
   return (
     <nav className={tw(`bg-lunarGrey`)}>
@@ -129,8 +142,30 @@ const Navigation = () => {
               </div>
             </div>
           </div>
-          <div className={tw(`-mr-2 flex md:hidden`)}>
-            <MenuButton showMenu={showMenu} toggleMenu={toggleMenu} />
+          <div className={tw(`flex items-center space-x-4`)}>
+            <div className={tw(`relative`)}>
+              <button onClick={toggleUserDropdown} className={tw(`flex items-center`)}>
+                <img
+                  className={tw(`h-10 w-10 rounded-full`)}
+                  src="/blank_profile.png"
+                  alt="User Profile"
+                />
+              </button>
+
+              {showUserDropdown && (
+                <div className={tw(`absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50`)}>
+                  <div className={tw(`px-4 py-2 text-sm text-gray-700`)}>Name: {userData.name}</div>
+                  <div className={tw(`px-4 py-2 text-sm text-gray-700`)}>Role: {userData.role}</div>
+                  <div className={tw(`px-4 py-2 text-sm text-gray-700`)}>Birthday: {userData.birthday}</div>
+                  <div className={tw(`px-4 py-2 text-sm text-gray-700`)}>Email: {userData.email}</div>
+                  <div className={tw(`px-4 py-2 text-sm text-gray-700`)}>Points: {userData.points}</div>
+                </div>
+              )}
+            </div>
+
+            <div className={tw(`-mr-2 flex md:hidden`)}>
+              <MenuButton showMenu={showMenu} toggleMenu={toggleMenu} />
+            </div>
           </div>
         </div>
       </div>
