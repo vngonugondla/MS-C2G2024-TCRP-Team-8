@@ -16,7 +16,7 @@ type Link = {
 const links = [
   {
     label: `Chatbot`,
-    href: `/meet`,
+    href: `/chatbot`,
   },
   {
     label: `Requests`,
@@ -24,15 +24,15 @@ const links = [
   },
   {
     label: `Suggestions`,
-    href: `/chatbot`,
+    href: `/portal`,
   },
   {
     label: `Meet People`,
-    href: `/matches`,
+    href: `/meet`,
   },
   {
     label: `Your Matches!`,
-    href: `/meet`,
+    href: `/matches`,
   },
   {
     label: `Start Chatting`,
@@ -96,17 +96,6 @@ const MobileMenu = () => (
         </a>
       ))}
     </div>
-    <div className={tw(`pt-4 pb-3 border-t border-gray-400`)}>
-      <div className={tw(`px-2 space-y-1`)}>
-        <a
-          key={`mobile-${secondaryLinks[0].label}`}
-          href={secondaryLinks[0].href}
-          className={tw(`block px-3 py-2 text-base font-medium text-gray-500`)}
-        >
-          {secondaryLinks[0].label}
-        </a>
-      </div>
-    </div>
   </div>
 );
 
@@ -120,8 +109,8 @@ const Navigation = () => {
         <div className={tw(`flex items-center justify-between h-24`)}>
           <div className={tw(`flex items-center`)}>
             <div className={tw(`flex-shrink-0`)}>
-              <Link href="/" passHref>
-                  <img className={tw(`h-12 w-12 cursor-pointer`)} src="/logo.jpeg" alt="logo" width={48} height={48} />
+              <Link href="/">
+                <img className={tw(`h-12 w-12`)} src="logo.svg" alt="logo" width={48} height={48} />
               </Link>
             </div>
             <div className={tw(`hidden md:block`)}>
@@ -136,11 +125,6 @@ const Navigation = () => {
                   </a>
                 ))}
               </div>
-            </div>
-          </div>
-          <div className={tw(`hidden md:block`)}>
-            <div className={tw(`ml-4 flex items-center md:ml-6`)}>
-              <Button primary>Log In</Button>
             </div>
           </div>
           <div className={tw(`-mr-2 flex md:hidden`)}>

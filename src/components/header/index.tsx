@@ -29,7 +29,10 @@ const Header = () => (
     </div>
     <div className={tw(`flex justify-center w-full`)}>
       <div className={tw(`mt-4 w-full`)}>
-        <p className={tw(`font-mono uppercase text-center font-medium text-sm text-gray-600`)}>The mission of The Community Restoration Project  Corp (CRP) is to provide families and individuals the resources to live productive lives.</p>
+        <p className={tw(`font-mono uppercase text-center font-medium text-sm text-gray-600`)}>
+          The mission of The Community Restoration Project Corp (CRP) is to provide families and individuals the
+          resources to live productive lives.
+        </p>
         {/* <div className={tw(`flex items-center justify-center mx-auto flex-wrap`)}>
           <Aws className={tw(`m-12 mb-8`)} width={120} />
           <Netlify className={tw(`m-12`)} width={140} />

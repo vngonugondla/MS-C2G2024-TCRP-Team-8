@@ -73,7 +73,8 @@ const CasesSection = () => (
       <div className={tw(`max-w-7xl mx-4 lg:mx-auto pt-20 lg:pt-40`)}>
         <h1 className={tw(`text-white text-4xl lg:text-7xl font-bold text-center`)}>Engage. Connect. Grow.</h1>
         <p className={tw(`text-white text-gray-400 text-center text-xl mt-12`)}>
-          Use our features to seamlessly connect with your community, fostering engagement and collaboration through powerful tools.
+          Use our features to seamlessly connect with your community, fostering engagement and collaboration through
+          powerful tools.
         </p>
         <div className={tw(`mx-auto pt-24`)}>
           <div className={tw(`w-full flex flex-wrap justify-around`)}>
