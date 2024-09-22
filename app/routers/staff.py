@@ -20,10 +20,7 @@ async def read_profile(target_uid: str, uid: str = Depends(get_current_user)):
         logging.info(f"Fetching {target_uid} for staff uid: {uid}")
 
         user_profile = firestore_service.get_user_profile(uid)
-        if not user_profile:
-            raise HTTPException(status_code=404, detail="User profile not found.")
-        if user_profile.get('community_role') != 'staff':
-            raise HTTPException(status_code=403, detail="Access forbidden: Staff only.")
+        verify_identity(user_profile)
      
         user_data = firestore_service.get_user_profile(target_uid)
         if user_data:
@@ -39,10 +36,7 @@ async def edit_profile(profile_patch: ProfilePatch, uid: str = Depends(get_curre
     try:
         logging.info(f"Updating profile for UID: {profile_patch.target_uid} by staff UID: {uid}")
         user_profile = firestore_service.get_user_profile(uid)
-        if not user_profile:
-            raise HTTPException(status_code=404, detail="User profile not found.")
-        if user_profile.get('community_role') != 'staff':
-            raise HTTPException(status_code=403, detail="Access forbidden: Staff only.")
+        verify_identity(user_profile)
 
         firestore_service.update_user_profile(profile_patch.target_uid, profile_patch.dict(exclude_unset=True))
        
@@ -57,10 +51,7 @@ async def get_all_users(query: str, uid: str = Depends(get_current_user)):
         logging.info(f"Fetching all users for staff uid: {uid}")
 
         user_profile = firestore_service.get_user_profile(uid)
-        if not user_profile:
-            raise HTTPException(status_code=404, detail="User profile not found.")
-        if user_profile.get('community_role') != 'staff':
-            raise HTTPException(status_code=403, detail="Access forbidden: Staff only.")
+        verify_identity(user_profile)
         
         users = firestore_service.get_all_users(query)
         if users:
@@ -77,10 +68,7 @@ async def toggle_active(request: ToggleActiveRequest, uid: str = Depends(get_cur
         logging.info(f"Toggling active status for UID: {request.target_uid} by staff UID: {uid}")
 
         user_profile = firestore_service.get_user_profile(uid)
-        if not user_profile:
-            raise HTTPException(status_code=404, detail="User profile not found.")
-        if user_profile.get('community_role') != 'staff':
-            raise HTTPException(status_code=403, detail="Access forbidden: Staff only.")
+        verify_identity(user_profile)
         
         toggled_profile = firestore_service.toggle_user_active_status(request.target_uid)
 
@@ -99,10 +87,7 @@ async def toggle_approved(request: ToggleApprovedRequest, uid: str = Depends(get
         logging.info(f"Toggling approved status for UID: {request.target_uid} by staff UID: {uid}")
 
         user_profile = firestore_service.get_user_profile(uid)
-        if not user_profile:
-            raise HTTPException(status_code=404, detail="User profile not found.")
-        if user_profile.get('community_role') != 'staff':
-            raise HTTPException(status_code=403, detail="Access forbidden: Staff only.")
+        verify_identity(user_profile)
         
         toggled_profile = firestore_service.toggle_user_approved_status(request.target_uid)
 
@@ -121,10 +106,7 @@ async def change_email(request: ProfilePatch, uid: str = Depends(get_current_use
         logging.info(f"Changing email for UID: {request.target_uid} by staff UID: {uid}")
 
         user_profile = firestore_service.get_user_profile(uid)
-        if not user_profile:
-            raise HTTPException(status_code=404, detail="User profile not found.")
-        if user_profile.get('community_role') != 'staff':
-            raise HTTPException(status_code=403, detail="Access forbidden: Staff only.")
+        verify_identity(user_profile)
         
         firestore_service.change_email(request.target_uid, request.email)
 
@@ -138,12 +120,16 @@ async def change_phone(request: ProfilePatch, uid: str = Depends(get_current_use
         logging.info(f"Changing phone for UID: {request.target_uid} by staff UID: {uid}")
 
         user_profile = firestore_service.get_user_profile(uid)
-        if not user_profile:
-            raise HTTPException(status_code=404, detail="User profile not found.")
-        if user_profile.get('community_role') != 'staff':
-            raise HTTPException(status_code=403, detail="Access forbidden: Staff only.")
-
+        verify_identity(user_profile)
         firestore_service.change_phone(request.target_uid, request.phone)
     except Exception as e:
         logging.error(f"Error changing phone for UID: {request.target_uid}: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
+
+def verify_identity(user_profile):
+    if not user_profile:
+        raise HTTPException(status_code=404, detail="User profile not found.")
+    if user_profile.get('community_role') != 'staff':
+        raise HTTPException(status_code=403, detail="Access forbidden: Staff only.")
+    if not (user_profile.get('active') and user_profile.get('approved')):
+        raise HTTPException(status_code=403, detail="Access forbidden: Active, approved community members  only.")
