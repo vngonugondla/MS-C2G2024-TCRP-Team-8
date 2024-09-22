@@ -1,6 +1,10 @@
 fastapi
 uvicorn
 firebase-admin
+pydantic
 pydantic[email]
 httpx
 python-dotenv
+scikit-learn
+transformers
+sentence-transformers

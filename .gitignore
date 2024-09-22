@@ -1,16 +1,15 @@
-
+# env
 venv/
+.env
 
-
+# cache
 __pycache__/
 *.pyc
 
+# secrets
+ms-c2g2024-tcrp-team8-firebase-adminsdk-9yryu-f9c8ad7b0a.json
 
-.env
-
-# Firebase credentials
-app/core/ms-c2g2024-tcrp-team8-firebase-adminsdk-9yryu-f9c8ad7b0a.json
-
+# IDE
 .DS_Store
 .vscode/
 .idea/

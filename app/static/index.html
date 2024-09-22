@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Community Chat App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Community Chat App</h1>
@@ -17,7 +18,7 @@
     </div>
 
     <!-- Sign Up Form -->
-    <div id="auth" style="display: none;">
+    <div id="auth" class="hidden">
         <h2>Sign Up</h2>
         <input id="email" type="email" placeholder="Email" required>
         <input id="password" type="password" placeholder="Password" required>
@@ -26,22 +27,23 @@
     </div>
 
     <!-- Profile Form -->
-    <div id="profile" style="display: none;">
+    <div id="profile" class="hidden">
         <h2>Create/Update Profile</h2>
         <input id="name" placeholder="Name" required>
         <input id="phone" placeholder="Phone">
-        <input id="birthday" type="date" placeholder="Birthday" required>
+        <input id="birthday" type="date" placeholder="Birthday">
         <input id="gender" placeholder="Gender">
         <input id="bio" placeholder="Bio">
         <input id="interests" placeholder="Interests (comma-separated)">
         <input id="community_role" placeholder="Community Role" value="member">
         <input id="profile_picture" placeholder="Profile Picture URL">
         <input id="location" placeholder="Location">
-        <button id="createProfileButton">Save Profile</button>
+        <button id="saveProfileButton">Save Profile</button>
+        <button id="cancelProfileButton">Cancel</button>
     </div>
 
     <!-- User Dashboard -->
-    <div id="dashboard" style="display: none;">
+    <div id="dashboard" class="hidden">
         <h2>Welcome, <span id="userName"></span></h2>
         <img id="userProfilePicture" src="" alt="Profile Picture" width="100" height="100">
         <p><strong>Email:</strong> <span id="userEmail"></span></p>
@@ -51,163 +53,33 @@
         <p><strong>Bio:</strong> <span id="userBio"></span></p>
         <p><strong>Interests:</strong> <span id="userInterests"></span></p>
         <p><strong>Location:</strong> <span id="userLocation"></span></p>
+        <button id="editProfileButton">Edit Profile</button>
         <button id="logoutButton">Logout</button>
+        <div id="staffActions" class="hidden">
+            <button id="openStaffPortalButton">Staff Portal</button>
+        </div>
     </div>
 
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
+    <!-- Staff Portal -->
+    <div id="staffPortal" class="hidden">
+        <h2>Staff Portal - All Users</h2>
+        <table id="usersTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Community Role</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <button id="closeStaffPortalButton">Close</button>
+    </div>
 
-
-        // Firebase configuration
-        const firebaseConfig = {
-            // add secrets here
-        };
-
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const analytics = getAnalytics(app);
-
-        // Toggle between Login and Sign Up forms
-        document.getElementById("showSignUp").addEventListener("click", () => {
-            document.getElementById("login").style.display = "none";
-            document.getElementById("auth").style.display = "block";
-        });
-
-        document.getElementById("showLogin").addEventListener("click", () => {
-            document.getElementById("auth").style.display = "none";
-            document.getElementById("login").style.display = "block";
-        });
-
-        // Sign Up Function
-        document.getElementById("signUpButton").addEventListener("click", async () => {
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-            try {
-                await createUserWithEmailAndPassword(auth, email, password);
-                document.getElementById("auth").style.display = "none";
-                document.getElementById("profile").style.display = "block";
-            } catch (error) {
-                console.error("Error signing up: ", error);
-                alert("Sign-up failed: " + error.message);
-            }
-        });
-
-        // Login Function
-        document.getElementById("loginButton").addEventListener("click", async () => {
-            const email = document.getElementById("loginEmail").value;
-            const password = document.getElementById("loginPassword").value;
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-                document.getElementById("login").style.display = "none";
-                // Fetch and display user profile
-            } catch (error) {
-                console.error("Error logging in: ", error);
-                alert("Login failed: " + error.message);
-            }
-        });
-
-        // Profile Creation/Update Function
-        document.getElementById("createProfileButton").addEventListener("click", async () => {
-            const user = auth.currentUser;
-            if (user) {
-                const profile = {
-                    user_id: user.uid,
-                    name: document.getElementById("name").value,
-                    email: user.email,
-                    phone: document.getElementById("phone").value,
-                    birthday: document.getElementById("birthday").value,
-                    gender: document.getElementById("gender").value,
-                    bio: document.getElementById("bio").value,
-                    interests: document.getElementById("interests").value.split(',').map(item => item.trim()),
-                    community_role: document.getElementById("community_role").value || 'member',
-                    profile_picture: document.getElementById("profile_picture").value,
-                    location: document.getElementById("location").value,
-                    approved: false,
-                    active: true,
-                    created_at: new Date().toISOString(),
-                    points: 0
-                };
-
-                try {
-                    await fetch("/users/profile", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${await user.getIdToken()}`,
-                        },
-                        body: JSON.stringify(profile)
-                    });
-                    alert("Profile saved successfully!");
-                    document.getElementById("profile").style.display = "none";
-                    displayDashboard(profile);
-                } catch (error) {
-                    console.error("Error saving profile: ", error);
-                    alert("Profile save failed: " + error.message);
-                }
-            }
-        });
-
-        // Logout Function
-        document.getElementById("logoutButton").addEventListener("click", async () => {
-            try {
-                await signOut(auth);
-                alert("Logged out successfully!");
-                document.getElementById("dashboard").style.display = "none";
-                document.getElementById("login").style.display = "block";
-            } catch (error) {
-                console.error("Error logging out: ", error);
-            }
-        });
-
-        // Monitor Auth State
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                // User is signed in
-                document.getElementById("auth").style.display = "none";
-                document.getElementById("login").style.display = "none";
-                try {
-                    const response = await fetch("/users/profile/me", {
-                        method: "GET",
-                        headers: {
-                            "Authorization": `Bearer ${await user.getIdToken()}`,
-                        },
-                    });
-                    if (response.ok) {
-                        const profile = await response.json();
-                        displayDashboard(profile);
-                    } else {
-                        // No profile found, prompt to create one
-                        document.getElementById("profile").style.display = "block";
-                    }
-                } catch (error) {
-                    console.error("Error fetching profile: ", error);
-                }
-            } else {
-                // No user is signed in
-                document.getElementById("auth").style.display = "none";
-                document.getElementById("profile").style.display = "none";
-                document.getElementById("dashboard").style.display = "none";
-                document.getElementById("login").style.display = "block";
-            }
-        });
-
-        // Display Dashboard with User Profile Data
-        function displayDashboard(profile) {
-            document.getElementById("userName").textContent = profile.name;
-            document.getElementById("userEmail").textContent = profile.email;
-            document.getElementById("userPhone").textContent = profile.phone || "N/A";
-            document.getElementById("userBirthday").textContent = profile.birthday ? new Date(profile.birthday).toLocaleDateString() : "N/A";
-            document.getElementById("userGender").textContent = profile.gender || "N/A";
-            document.getElementById("userBio").textContent = profile.bio || "N/A";
-            document.getElementById("userInterests").textContent = profile.interests.join(', ') || "N/A";
-            document.getElementById("userLocation").textContent = profile.location || "N/A";
-            document.getElementById("userProfilePicture").src = profile.profile_picture || "default-profile.png";
-            document.getElementById("dashboard").style.display = "block";
-        }
-    </script>
+    <!-- Import JavaScript modules -->
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>
