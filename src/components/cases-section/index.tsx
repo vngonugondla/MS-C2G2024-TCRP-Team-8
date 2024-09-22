@@ -1,6 +1,7 @@
 import { tw } from 'twind';
 import Particles from 'react-particles-js';
 import Arrow from '@/constants/svg/arrow.svg';
+import { useRouter } from 'next/router';
 
 const ParticleBg = () => (
   <Particles
@@ -49,22 +50,32 @@ const articles = [
     subtitle: 'Submit questions and concerns to CRP team.',
     image: `/images/case-1.webp`,
     alt: `Proident pariatur est.`,
+    href: '/portal',
   },
   {
     title: `Find others.`,
     subtitle: 'Find similar members in the community.',
     image: `/images/case-2.webp`,
     alt: `Proident pariatur est.`,
+    href: '/matches',
   },
   {
     title: `Chat.`,
     subtitle: 'Get all your questions answered.',
     image: `/images/case-3.webp`,
     alt: `Proident pariatur est.`,
+    href: '/message',
   },
 ];
 
-const CasesSection = () => (
+const CasesSection = () => {
+  const router = useRouter();
+
+  const handleClick = (href: string) => {
+    router.push(href);
+  };
+
+  return (
   <section>
     <div className={tw(`w-full min-h-screen bg-gray-900 relative`)}>
       <div className={tw(`absolute left-0 top-0 h-screen w-full overflow-hidden`)}>
@@ -85,6 +96,7 @@ const CasesSection = () => (
                   `xl:w-1/3 sm:w-5/12 sm:max-w-xs relative mb-32 lg:mb-20
                       xl:max-w-sm lg:w-1/2 w-11/12 mx-auto sm:mx-0 cursor-pointer hover:scale-105`,
                 )}
+                onClick={() => handleClick(article.href)}
               >
                 <div className={tw(`h-64 z-20`)}>
                   <img
@@ -116,6 +128,7 @@ const CasesSection = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default CasesSection;
