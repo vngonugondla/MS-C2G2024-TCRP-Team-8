@@ -14,19 +14,23 @@ type Link = {
 
 const links = [
   {
-    label: `Suggestion Portal`,
-    href: `/portal`,
+    label: `Chatbot`,
+    href: `/meet`,
   },
   {
-    label: `Chatbot`,
+    label: `Requests`,
+    href: `/requests`,
+  },
+  {
+    label: `Suggestions`,
     href: `/chatbot`,
   },
   {
-    label: `Our Community`,
-    href: `/community`,
+    label: `Meet People`,
+    href: `/matches`,
   },
   {
-    label: `Meet Members`,
+    label: `Your Matches!`,
     href: `/meet`,
   },
   {
@@ -61,6 +65,7 @@ const MenuButton = ({ toggleMenu, showMenu }: IMenuButton) => (
         aria-hidden="true"
         width={24}
         height={24}
+        href="/"
       >
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
       </svg>
