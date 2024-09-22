@@ -5,15 +5,17 @@ import Link from 'next/link';
 
 interface IProps {
   children: React.ReactNode;
+  hideNavigation?: boolean;
 }
 
-const Page = ({ children }: IProps) => (
+const Page = ({ children, hideNavigation }: IProps) => (
   <div>
     <Head>
       <link rel="icon" href="/logo.svg" />
     </Head>
     <div className={tw(`min-h-screen flex flex-col`)}>
-      <Navigation />
+      {/* <Navigation /> */}
+      {!hideNavigation && <Navigation />}
       <div className={tw('bg-lightGrey')}>{children}</div>
     </div>
   </div>
