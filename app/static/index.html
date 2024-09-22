@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Community Chat App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Community Chat App</h1>
+
+    <!-- Login Form -->
+    <div id="login">
+        <h2>Login</h2>
+        <input id="loginEmail" type="email" placeholder="Email" required>
+        <input id="loginPassword" type="password" placeholder="Password" required>
+        <button id="loginButton">Login</button>
+        <p>Don't have an account? <a href="#" id="showSignUp">Sign Up</a></p>
+    </div>
+
+    <!-- Sign Up Form -->
+    <div id="auth" class="hidden">
+        <h2>Sign Up</h2>
+        <input id="email" type="email" placeholder="Email" required>
+        <input id="password" type="password" placeholder="Password" required>
+        <button id="signUpButton">Sign Up</button>
+        <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+    </div>
+
+    <!-- Profile Form -->
+    <div id="profile" class="hidden">
+        <h2>Create/Update Profile</h2>
+        <input id="name" placeholder="Name" required>
+        <input id="phone" placeholder="Phone">
+        <input id="birthday" type="date" placeholder="Birthday">
+        <input id="gender" placeholder="Gender">
+        <input id="bio" placeholder="Bio">
+        <input id="interests" placeholder="Interests (comma-separated)">
+        <input id="community_role" placeholder="Community Role" value="member">
+        <input id="profile_picture" placeholder="Profile Picture URL">
+        <input id="location" placeholder="Location">
+        <button id="saveProfileButton">Save Profile</button>
+        <button id="cancelProfileButton">Cancel</button>
+    </div>
+
+    <!-- User Dashboard -->
+    <div id="dashboard" class="hidden">
+        <h2>Welcome, <span id="userName"></span></h2>
+        <img id="userProfilePicture" src="" alt="Profile Picture" width="100" height="100">
+        <p><strong>Email:</strong> <span id="userEmail"></span></p>
+        <p><strong>Phone:</strong> <span id="userPhone"></span></p>
+        <p><strong>Birthday:</strong> <span id="userBirthday"></span></p>
+        <p><strong>Gender:</strong> <span id="userGender"></span></p>
+        <p><strong>Bio:</strong> <span id="userBio"></span></p>
+        <p><strong>Interests:</strong> <span id="userInterests"></span></p>
+        <p><strong>Location:</strong> <span id="userLocation"></span></p>
+        <button id="editProfileButton">Edit Profile</button>
+        <button id="logoutButton">Logout</button>
+        <div id="staffActions" class="hidden">
+            <button id="openStaffPortalButton">Staff Portal</button>
+        </div>
+    </div>
+
+    <!-- Staff Portal -->
+    <div id="staffPortal" class="hidden">
+        <h2>Staff Portal - All Users</h2>
+        <table id="usersTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Community Role</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <button id="closeStaffPortalButton">Close</button>
+    </div>
+
+    <!-- Import JavaScript modules -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
