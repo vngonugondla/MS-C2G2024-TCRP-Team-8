@@ -6,7 +6,7 @@ import Figma from '@/constants/svg/figma.svg';
 import Aws from '@/constants/svg/aws.svg';
 
 const headerStyle = css`
-  background-color: #ffffff;
+  background-color: lightGrey;
   min-height: calc(100vh - 6rem);
 `;
 

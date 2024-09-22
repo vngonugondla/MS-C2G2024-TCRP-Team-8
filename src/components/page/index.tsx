@@ -14,7 +14,7 @@ const Page = ({ children }: IProps) => (
     </Head>
     <div className={tw(`min-h-screen flex flex-col`)}>
       <Navigation />
-      {children}
+      <div className={tw('bg-lightGrey')}>{children}</div>
     </div>
   </div>
 );
