@@ -8,6 +8,7 @@ import CasesSection from '@/components/cases-section';
 import SocialProof from '@/components/social-proof';
 import PricingTable from '@/components/pricing-table';
 import Footer from '@/components/footer';
+import CalendarSection from '@/components/calendar';
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
         {/* <VideoSection /> */}
         {/* <ListSection /> */}
         {/* <FeatureSection /> */}
+        <CalendarSection />
         <CasesSection />
         {/* <SocialProof /> */}
         {/* <PricingTable /> */}
