@@ -4,6 +4,7 @@ from app.models.user import User
 from app.models.patch import ProfilePatch
 
 from app.services.firestore_service import FirestoreService
+from app.services.matchmaking_service import MatchmakingService
 from typing import List
 import logging
 from datetime import datetime
@@ -62,3 +63,25 @@ async def get_all_points(uid: str = Depends(get_current_user)):
         logging.error(f"Error getting points for all users: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
+
+@router.get("/matchmaking", response_model=List[User])
+async def get_matchmaking(uid: str = Depends(get_current_user)):
+    
+    
+    user = firestore_service.get_user_profile(uid)
+    
+    
+    matchmaking_service = MatchmakingService(user)
+    
+    try:
+        logging.info(f"Fetching all users for staff uid: {uid}")
+
+        users = matchmaking_service.recommend(3)
+    
+        if users:
+            return users
+        else:
+            raise HTTPException(status_code=404, detail="No users found.")
+    except Exception as e:
+        logging.error(f"Error in get_all_users: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
