@@ -13,3 +13,5 @@ ms-c2g2024-tcrp-team8-firebase-adminsdk-9yryu-f9c8ad7b0a.json
 .DS_Store
 .vscode/
 .idea/
+
+node_modules/

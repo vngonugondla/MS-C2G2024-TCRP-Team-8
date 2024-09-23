@@ -14,7 +14,6 @@ async def create_profile(user: User, uid: str = Depends(get_current_user)):
     try:
         logging.info(f"Creating profile for uid: {uid}")
         user.user_id = uid
-        user.created_at = datetime.utcnow()
         firestore_service.create_user_profile(uid, user.dict())
         return user
     except Exception as e:
