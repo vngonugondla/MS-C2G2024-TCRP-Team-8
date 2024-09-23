@@ -7,7 +7,7 @@
 # MS-C2G2024-TCRP-Team-8
 Morgan Stanley 2024 Code to Give Team 8: Suraj Mehrotra, Swastik Samanta, Teghpreet Singh Mago, Tsui Yi Tracy Cheung, Tyler Rife, Veena Gonugondla, Viresh Pati, Vishnu Varma, Xinyuan Wang, Yu Lu
 
-## TThe Community Restoration Project
+## The Community Restoration Project
 The mission of The Community Restoration Project Corp (CRP) is to provide families and individuals the resources to live productive lives. The programs offered by CRP ensure that families and individuals have the tools they need to make this possible
 
 ### Problem Statement
