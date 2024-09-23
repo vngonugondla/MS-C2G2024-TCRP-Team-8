@@ -10,10 +10,10 @@ exports.id = "vendor-chunks/@fontsource";
 exports.ids = ["vendor-chunks/@fontsource"];
 exports.modules = {
 
-/***/ "./node_modules/@fontsource/inter/index.css":
-/*!**************************************************!*\
-  !*** ./node_modules/@fontsource/inter/index.css ***!
-  \**************************************************/
+/***/ "../../node_modules/@fontsource/inter/index.css":
+/*!******************************************************!*\
+  !*** ../../node_modules/@fontsource/inter/index.css ***!
+  \******************************************************/
 /***/ (() => {
 
 
