@@ -27,11 +27,11 @@ const links = [
     href: `/portal`,
   },
   {
-    label: `Meet People`,
+    label: `Staff Portal`,
     href: `/meet`,
   },
   {
-    label: `Your Matches!`,
+    label: `Matchmaking!`,
     href: `/matches`,
   },
   {

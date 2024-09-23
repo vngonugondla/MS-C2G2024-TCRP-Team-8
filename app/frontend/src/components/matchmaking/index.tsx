@@ -50,26 +50,25 @@ const Matchmaking = ({ currentUser }: IProps) => {
 
   return (
     <div className={tw(`flex flex-col items-center justify-center`)}>
-      <h2 className={tw(`text-xl font-bold mb-4`)}>Your Matches</h2>
-      <div className={tw(`w-full`)}>
+      <h2 className={tw(`text-2xl font-bold mb-6`)}>Your Matches</h2>
+      <div className={tw(`w-full flex flex-wrap justify-center`)}>
         {users.length > 0 ? (
           users.map((user) => (
-            <div key={user.user_id} className={tw(`border p-4 mb-4 rounded`)}>
-              <h3 className={tw(`text-lg font-bold`)}>{user.name}</h3>
-              <p>{user.email}</p>
-              <p>{user.phone}</p>
-              <p>{user.birthday}</p>
-              <p>{user.gender}</p>
-              <p>{user.bio}</p>
-              <p>{user.interests.join(', ')}</p>
-              <p>{user.community_role}</p>
-              <p>{user.location}</p>
-              <p>{user.points}</p>
-              {/* Add other user details here */}
+            <div key={user.user_id} className={tw(`border p-6 mb-6 rounded-lg shadow-lg w-80 mx-4 bg-white`)}>
+              <h3 className={tw(`text-xl font-semibold mb-2`)}>{user.name}</h3>
+              <p className={tw(`text-gray-700 mb-1`)}>{user.email}</p>
+              <p className={tw(`text-gray-700 mb-1`)}>{user.phone}</p>
+              <p className={tw(`text-gray-700 mb-1`)}>{user.birthday}</p>
+              <p className={tw(`text-gray-700 mb-1`)}>{user.gender}</p>
+              <p className={tw(`text-gray-700 mb-1`)}>{user.bio}</p>
+              <p className={tw(`text-gray-700 mb-1`)}>{user.interests.join(', ')}</p>
+              <p className={tw(`text-gray-700 mb-1`)}>{user.community_role}</p>
+              <p className={tw(`text-gray-700 mb-1`)}>{user.location}</p>
+              <p className={tw(`text-gray-700 mb-1`)}>{user.points}</p>
             </div>
           ))
         ) : (
-          <p>No matches found.</p>
+          <p className={tw(`text-lg text-gray-700`)}>No matches found.</p>
         )}
       </div>
     </div>

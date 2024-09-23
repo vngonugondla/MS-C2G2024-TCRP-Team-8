@@ -19,11 +19,6 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/chatbot": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/chatbot.js"
-    ],
     "/matches": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -34,15 +29,10 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/meet.js"
     ],
-    "/message": [
+    "/requests": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/message.js"
-    ],
-    "/portal": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/portal.js"
+      "static/chunks/pages/requests.js"
     ]
   },
   "ampFirstPages": []

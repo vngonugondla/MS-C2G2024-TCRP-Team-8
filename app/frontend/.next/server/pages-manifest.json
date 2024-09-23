@@ -3,8 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/meet": "pages/meet.js",
-  "/portal": "pages/portal.js",
-  "/message": "pages/message.js",
-  "/chatbot": "pages/chatbot.js",
-  "/matches": "pages/matches.js"
+  "/matches": "pages/matches.js",
+  "/requests": "pages/requests.js"
 }

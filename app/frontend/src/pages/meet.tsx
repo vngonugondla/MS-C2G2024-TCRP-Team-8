@@ -37,7 +37,7 @@ async function editUserProfile(uid: any) {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ /* your updated user data */ }),
+      body: JSON.stringify({ /*  user data */ }),
     });
 
     if (response.ok) {
@@ -102,33 +102,35 @@ export default function Home() {
   return (
     <Page>
       <h1>Manage Users</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Community Role</th>
-            <th>Active</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map(user => (
-            <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.community_role}</td>
-              <td>{user.active ? 'Yes' : 'No'}</td>
-              <td>
-                <button onClick={() => handleEditUser(user.uid)}>Edit</button>
-                <button onClick={() => handleToggleActive(user.uid)}>
-                  {user.active ? 'Deactivate' : 'Activate'}
-                </button>
-              </td>
+      <div className="center-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Community Role</th>
+              <th>Active</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map(user => (
+              <tr key={user.id}>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.community_role}</td>
+                <td>{user.active ? 'Yes' : 'No'}</td>
+                <td>
+                  <button onClick={() => handleEditUser(user.uid)}>Edit</button>
+                  <button onClick={() => handleToggleActive(user.uid)}>
+                    {user.active ? 'Deactivate' : 'Activate'}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </Page>
   );
 }
