@@ -32,7 +32,7 @@ async function editUserProfile(uid: any) {
   if (user) {
     const token = await user.getIdToken();
     const response = await fetch(`http://127.0.0.1:8000/staff/profile/`, {
-      method: 'PUT',
+      method: 'PATCH',
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',

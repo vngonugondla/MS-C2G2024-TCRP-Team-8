@@ -27,15 +27,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/chatbot.js"
     ],
-    "/indexReal": [
+    "/matches": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/indexReal.js"
+      "static/chunks/pages/matches.js"
     ],
     "/meet": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/meet.js"
+    ],
+    "/message": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/message.js"
     ],
     "/portal": [
       "static/chunks/webpack.js",

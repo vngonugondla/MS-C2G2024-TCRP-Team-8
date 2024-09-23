@@ -2,9 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/indexReal": "pages/indexReal.js",
-  "/inputs": "pages/inputs.js",
   "/meet": "pages/meet.js",
   "/portal": "pages/portal.js",
-  "/chatbot": "pages/chatbot.js"
+  "/message": "pages/message.js",
+  "/chatbot": "pages/chatbot.js",
+  "/matches": "pages/matches.js"
 }
