@@ -17,6 +17,10 @@ The Community Restoration Project seeks to improve social capital within their h
 ### Our Solution
 Our team developed a full-stack web app integrating features such as FAQ-based chatbot, requests and suggestions forum, social matchmaking and community-based calendar and chat to improve Community Restoration Project (CRP)’s impact on Atlanta housing and restoration. Our project aims to increase community engagement, enhance communication efficiency, improve social capital, empower financial stability, and optimize community support effectiveness within The Community Restoration Project.
 
+<p>
+  <img alt="image" style="width: 100%; height: auto;" src="https://github.com/user-attachments/assets/04cea87a-a49d-431c-93de-3fa248d9769c">
+</p>
+
 ### Features 
 - **FAQ-based Chatbot**: Automates FAQ responses and integrates with the suggestions portal to streamline user interactions, reducing workload and enhancing user experience.
 - **Suggestions Portal**: Enables users to submit queries, concerns, and feedback directly to CRP. Implements two-way communication between members and staff, fostering community-driven issue reporting and support.
