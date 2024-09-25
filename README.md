@@ -2,7 +2,7 @@
   <img src="https://github.com/user-attachments/assets/c23d384c-1807-4e28-bc85-5decbf7651b3" alt="image" style="width: 100%; height: auto;">
 </p>
 
-
+# Won 2nd place at Morgan Stanley 2024 Code to Give Hackathon!
 
 # MS-C2G2024-TCRP-Team-8
 Morgan Stanley 2024 Code to Give Team 8: Suraj Mehrotra, Swastik Samanta, Teghpreet Singh Mago, Tsui Yi Tracy Cheung, Tyler Rife, Veena Gonugondla, Viresh Pati, Vishnu Varma, Xinyuan Wang, Yu Lu
